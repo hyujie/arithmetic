@@ -11,44 +11,24 @@ import java.util.Map;
  * @ Date Create by in 11:02 2019/1/10
  */
 public class EasyArithmetic {
-
     /**
-     * 给定一个字符串，查找不重复字符的最长子字符串的长度。
-     * @param str
+     * 给定一个整数数组，返回两个数字的索引，使它们相加成为一个特定的目标。
+     * 您可能假设每个输入只有一个解决方案，并且您可能不会两次使用相同的元素。
+     * @param nums
+     * @param target
      * @return
      */
-    public int lengthOfLongestSubstring(String str){
-        int maxLength = 0;
-        char[] chars = str.toCharArray();
-        for(int i = 0;i<chars.length;i++){
-            Map<String,String> map = new HashMap<String,String>();
-            for(int n = i;n<chars.length;n++){
-                int temp = map.size();
-                map.put(String.valueOf(chars[n]),"");
-                if(temp == map.size()){
-                    if(temp > maxLength){
-                        maxLength = temp;
-                    }
-                    break;
-                }
-                if(n == chars.length - 1){
-                    if(map.size()>maxLength){
-                        maxLength = map.size();
-                    }
+    public int[] twoSum(int[] nums, int target) {
 
+        for(int i = 0;i<nums.length;i++){
+            for(int n = i+1;n<nums.length;n++){
+                int temp = nums[i]+nums[n];
+                if(temp == target){
+                    return new int[]{i,n};
                 }
             }
-
         }
-
-        return maxLength;
-    }
-    public static void main(String[] args) {
-        String s = " ";
-        char[] chars = s.toCharArray();
-        System.out.println(s.length());
-        int num = new EasyArithmetic().lengthOfLongestSubstring(s);
-        System.out.println(num);
+        return null;
     }
 
 
