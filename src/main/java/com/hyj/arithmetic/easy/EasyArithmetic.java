@@ -1,8 +1,6 @@
 package com.hyj.arithmetic.easy;
 
-import java.sql.SQLOutput;
-import java.util.HashMap;
-import java.util.Map;
+import com.hyj.arithmetic.ListNode;
 
 /**
  * @version 1.0
@@ -28,8 +26,64 @@ public class EasyArithmetic {
                 }
             }
         }
-        return null;
+        return new int[]{};
     }
 
+    /**
+     * 给出两个 非空 的链表用来表示两个非负的整数。其中，它们各自的位数是按照 逆序 的方式存储的，并且它们的每个节点只能存储 一位 数字。
+     *
+     * 如果，我们将这两个数相加起来，则会返回一个新的链表来表示它们的和。
+     *
+     * 您可以假设除了数字 0 之外，这两个数都不会以 0 开头。
+     * @param l1
+     * @param l2
+     * @return
+     */
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+//        ListNode result = new ListNode(0);
+        ListNode temp1 =l1,temp2 = l2;
+        ListNode first = null,last = null,resultTemp;
+        int num = 0;
+        int i = 0;
+        while(temp1 != null || temp2 != null){
+            int n = (temp1 == null)?0:temp1.val;
+            int m = (temp2 == null)?0:temp2.val;
+            num = (m+n+i)%10;
+            i = (m+n+i)/10;
+            resultTemp= new ListNode(num);
+            if(first == null){
+                first = resultTemp;
+                last = resultTemp;
+            }else {
+                last.nextNode = resultTemp;
+                last = last.nextNode;
+            }
+
+            temp1 = (temp1 != null)?temp1.nextNode:null;
+            temp2 = (temp2 != null)?temp2.nextNode:null;
+        }
+        if(i == 1){
+            resultTemp= new ListNode(i);
+            last.nextNode = resultTemp;
+
+        }
+        return first;
+    }
+
+    public static void main(String[] args) {
+        EasyArithmetic arithmetic = new EasyArithmetic();
+        //输入：(2 -> 4 -> 3) + (5 -> 6 -> 4)
+        //输出：7 -> 0 -> 8
+        //原因：342 + 465 = 807
+        int[] one = new int[]{2,4,3};
+        int[] second  = new int[]{5,6,4};
+        ListNode firstlistNode  = ListNode.buildListNode(one);
+        ListNode secondlistNode = ListNode.buildListNode(second);
+        ListNode listNode = arithmetic.addTwoNumbers(firstlistNode,secondlistNode);
+        System.out.println(listNode.val);
+        System.out.println(listNode.nextNode.val);
+        System.out.println(listNode.nextNode.nextNode.val);
+
+    }
 
 }
