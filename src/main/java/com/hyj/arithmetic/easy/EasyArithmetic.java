@@ -4,9 +4,9 @@ import com.hyj.arithmetic.ListNode;
 
 /**
  * @version 1.0
- * @ Authord  yujie huang  email: 190158792@qq.com
- * @ Description
- * @ Date Create by in 11:02 2019/1/10
+ * @authord  yujie huang  email: 190158792@qq.com
+ * @description
+ * @date Create by in 11:02 2019/1/10
  */
 public class EasyArithmetic {
     /**

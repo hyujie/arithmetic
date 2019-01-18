@@ -7,8 +7,8 @@ import java.util.Map;
 
 /**
  * @version 1.0
- * @ Authord  yujie huang  email: 190158792@qq.com
- * @ Description
+ * @author yujie huang  email: 190158792@qq.com
+ * @description
  * @ Date Create by in 14:41 2019/1/11
  */
 public class HardArithmetic {

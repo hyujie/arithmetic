@@ -3,7 +3,7 @@ import java.util.*;
 
 /**
  * @version 1.0
- * @ Authord  yujie huang  email: 190158792@qq.com
+ * @authord  yujie huang  email: 190158792@qq.com
  * @ Description
  * @ Date Create by in 14:04 2019/1/11
  */
@@ -35,7 +35,7 @@ public class MediumArithmetic {
 //        }
         int n = s.length(), ans = 0;
         int endTemp = 0;
-        Map<Character, Integer> map = new HashMap<Character, Integer>(); // current index of character
+        Map<Character, Integer> map = new HashMap<Character, Integer>(10);
         //gfsdvdfmefabe   pwwkew
         for(int i = 0;i<n;i++){
             if(map.containsKey(s.charAt(i))){
@@ -94,9 +94,40 @@ public class MediumArithmetic {
         return lists;
     }
 
+
+    /**
+     * 给定一个字符串 s，找到 s 中最长的回文子串。你可以假设 s 的最大长度为 1000。
+     * @param s
+     * @return
+     */
+    public String longestPalindrome(String s) {
+        Map<Character,List<Integer>> map = new HashMap<Character, List<Integer>>(10);
+        String result = "";
+        for(int i = 0;i<s.length();i++){
+            String s1 = getLength(s,i,i);
+            String s2 = getLength(s,i,i+1);
+            result = result.length()>(s1.length()>s2.length()?s1:s2).length()?result:(s1.length()>s2.length()?s1:s2);
+        }
+        return result;
+    }
+
+    public String getLength(String s,int i,int j) {
+        while (i >= 0 && j < s.length()) {
+            if (s.charAt(i) != s.charAt(j)) {
+                return s.substring(i+1,j);
+            }
+            i--;
+            j++;
+        }
+        return s.substring(i+1,j);
+    }
+
+
     public static void main(String[] args) {
         MediumArithmetic arithmetic = new MediumArithmetic();
-        System.out.println(arithmetic.lengthOfLongestSubstring("abcabcbb"));
+        System.out.println("abc".substring(1,3));         //adadabab
+        System.out.println(arithmetic.longestPalindrome("babadada"));
+      //  System.out.println(arithmetic.lengthOfLongestSubstring("abcabcbb"));
     }
 
 }

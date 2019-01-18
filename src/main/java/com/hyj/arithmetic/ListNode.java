@@ -4,7 +4,7 @@ import com.hyj.arithmetic.easy.EasyArithmetic;
 
 /**
  * @version 1.0
- * @ Authord  yujie huang  email: 190158792@qq.com
+ * @authord  yujie huang  email: 190158792@qq.com
  * @ Description 链表对象
  * @ Date Create by in 10:05 2019/1/15
  */
