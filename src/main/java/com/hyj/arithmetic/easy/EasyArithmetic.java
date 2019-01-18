@@ -72,18 +72,58 @@ public class EasyArithmetic {
 
     public static void main(String[] args) {
         EasyArithmetic arithmetic = new EasyArithmetic();
-        //输入：(2 -> 4 -> 3) + (5 -> 6 -> 4)
-        //输出：7 -> 0 -> 8
-        //原因：342 + 465 = 807
-        int[] one = new int[]{2,4,3};
-        int[] second  = new int[]{5,6,4};
-        ListNode firstlistNode  = ListNode.buildListNode(one);
-        ListNode secondlistNode = ListNode.buildListNode(second);
-        ListNode listNode = arithmetic.addTwoNumbers(firstlistNode,secondlistNode);
-        System.out.println(listNode.val);
-        System.out.println(listNode.nextNode.val);
-        System.out.println(listNode.nextNode.nextNode.val);
+        System.out.println(arithmetic.reverse2(-123));
 
+    }
+
+    public int reverse(int x) {
+        String temp = x+"";
+        StringBuffer buffer = new StringBuffer();
+        if(x<0){
+            buffer.append("-");
+            for(int i = temp.length()-1;i>0;i--){
+                buffer.append(temp.charAt(i));
+            }
+           if(Long.valueOf(buffer.toString()) < Integer.MIN_VALUE){
+               return 0;
+           }else {
+               return Integer.valueOf(buffer.toString());
+           }
+
+        }else {
+            for(int i = temp.length()-1;i>=0;i--){
+                buffer.append(temp.charAt(i));
+            }
+            if(Long.valueOf(buffer.toString()) > Integer.MAX_VALUE){
+                return 0;
+            }else {
+                return Integer.valueOf(buffer.toString());
+            }
+        }
+    }
+    public int reverse2(int x) {
+        String temp = x+"";
+
+        if(x<0){
+            temp = temp.replace("-","");
+            StringBuffer buffer = new StringBuffer(temp);
+            buffer.reverse();
+
+            if(Long.valueOf("-"+buffer.toString()) < Integer.MIN_VALUE){
+                return 0;
+            }else {
+                return Integer.valueOf("-"+buffer.toString());
+            }
+
+        }else {
+            StringBuffer buffer = new StringBuffer(temp);
+            buffer.reverse();
+            if(Long.valueOf(buffer.toString()) > Integer.MAX_VALUE){
+                return 0;
+            }else {
+                return Integer.valueOf(buffer.toString());
+            }
+        }
     }
 
 }
