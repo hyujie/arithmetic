@@ -70,12 +70,6 @@ public class EasyArithmetic {
         return first;
     }
 
-    public static void main(String[] args) {
-        EasyArithmetic arithmetic = new EasyArithmetic();
-        System.out.println(arithmetic.reverse2(-123));
-
-    }
-
     public int reverse(int x) {
         String temp = x+"";
         StringBuffer buffer = new StringBuffer();
@@ -125,5 +119,43 @@ public class EasyArithmetic {
             }
         }
     }
+
+    /**
+     * 判断一个整数是否是回文数。回文数是指正序（从左向右）和倒序（从右向左）读都是一样的整数。
+     * @param x
+     * @return
+     */
+    public boolean isPalindrome(int x) {
+        if(x<0){
+            return false;
+        }
+        if(x <10){
+            return true;
+        }
+        if(x%10 == 0){
+            return false;
+        }
+        int temp = 0;
+        while(x > 0 ){
+            temp = temp*10+x%10;
+            x = x/10;
+            if((x == temp || x/10 == temp)){
+                return true;
+            }
+            if(x<temp&&x/10 < temp){
+                return false;
+            }
+        }
+        return false;
+
+    }
+
+    public static void main(String[] args) {
+        EasyArithmetic arithmetic = new EasyArithmetic();
+        System.out.println(arithmetic.isPalindrome(11));
+
+    }
+
+
 
 }
