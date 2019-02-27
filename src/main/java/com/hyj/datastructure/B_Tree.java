@@ -6,11 +6,11 @@ package com.hyj.datastructure;
  * @Description
  * @Date Create by in 16:34 2019/2/26
  */
-public interface B_Tree {
+public interface B_Tree<T> {
 
-    Node find();
+    Node find(T k);
 
-    boolean insert(Node node);
+    boolean insert(T k);
 
-    boolean delete(Node node);
+    boolean delete(T k);
 }
