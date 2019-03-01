@@ -1,4 +1,4 @@
-package com.hyj.datastructure;
+package com.hyj.datastructure.btree;
 
 /**
  * @version 1.0
@@ -10,7 +10,7 @@ public class Node<T> {
     public T var;
     public Node<T> rightChild;//右支点
     public Node<T> leftChild;//左支点
-    public boolean isdelete;
+    public boolean isdelete = false;
     public  Comparable<? super T> comparable;
 
     public Node(T var){

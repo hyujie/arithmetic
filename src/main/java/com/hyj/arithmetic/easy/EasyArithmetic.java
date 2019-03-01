@@ -1,7 +1,6 @@
 package com.hyj.arithmetic.easy;
 
 import com.hyj.arithmetic.ListNode;
-
 /**
  * @version 1.0
  * @authord  yujie huang  email: 190158792@qq.com
@@ -17,7 +16,6 @@ public class EasyArithmetic {
      * @return
      */
     public int[] twoSum(int[] nums, int target) {
-
         for(int i = 0;i<nums.length;i++){
             for(int n = i+1;n<nums.length;n++){
                 int temp = nums[i]+nums[n];

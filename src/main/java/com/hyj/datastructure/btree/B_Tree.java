@@ -1,4 +1,4 @@
-package com.hyj.datastructure;
+package com.hyj.datastructure.btree;
 
 /**
  * @version 1.0

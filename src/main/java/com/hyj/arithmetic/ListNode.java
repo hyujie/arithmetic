@@ -1,6 +1,7 @@
 package com.hyj.arithmetic;
 
 import com.hyj.arithmetic.easy.EasyArithmetic;
+import com.hyj.arithmetic.sort.LowLevelSorting;
 
 /**
  * @version 1.0
@@ -57,4 +58,29 @@ public class ListNode {
         return head;
 
     }
+
+    /**
+     * 输入一个链表，反转链表后，输出新链表的表头。
+     * @param head
+     * @return
+     */
+    public static ListNode ReverseList(ListNode head) {
+        ListNode q = null;
+        ListNode p = null;
+        int count = 0;
+        while(head != null){
+            q = head;
+            head = head.nextNode;
+            if(count == 0){
+                q.nextNode = null;
+                p = q;
+                count++;
+            } else {
+                q.nextNode = p;
+                p=  q;
+            }
+        }
+        return q;
+    }
+
 }

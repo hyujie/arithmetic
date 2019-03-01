@@ -127,6 +127,9 @@ public class MediumArithmetic {
         MediumArithmetic arithmetic = new MediumArithmetic();
         System.out.println("abc".substring(1,3));         //adadabab
         System.out.println(arithmetic.longestPalindrome("babadada"));
+        int s = -112;
+        System.out.println(String.valueOf(s));
+        System.out.println(String.valueOf(s).replace("-",""));
       //  System.out.println(arithmetic.lengthOfLongestSubstring("abcabcbb"));
     }
 

@@ -1,4 +1,4 @@
-package com.hyj.datastructure;
+package com.hyj.datastructure.btree;
 
 /**
  * @version 1.0
@@ -6,9 +6,9 @@ package com.hyj.datastructure;
  * @Description
  * @Date Create by in 17:01 2019/2/26
  */
-public class B_Node<T> implements B_Tree<T>{
+public class B_Node<T> implements B_Tree<T> {
 
-    private Node root;//根节点
+    private Node<T> root;//根节点
 
     public B_Node(Node<T> root) {
         this.root = root;
@@ -66,29 +66,30 @@ public class B_Node<T> implements B_Tree<T>{
 
     public boolean delete(T k) {
         Node<T> parent = null;
-        Node<T> copy = root;
+        Node<T> delNode = root;
         boolean isLeft = false;
         if(root.comparable == null){
             Comparable<? super T> s = (Comparable<? super T>) k;
-            while(copy != null){
-                if(s.compareTo((T)copy.var)>0){
-                    parent = copy;
-                    copy = copy.rightChild;
+            while(delNode != null){
+                if(s.compareTo((T)delNode.var)>0){
+                    parent = delNode;
+                    delNode = delNode.rightChild;
                     isLeft = false;
-                }else if (s.compareTo(k)<0){
-                    parent = copy;
-                    copy = copy.leftChild;
+                }else if (s.compareTo((T)delNode.var)<0){
+                    parent = delNode;
+                    delNode = delNode.leftChild;
                     isLeft = true;
                 }else{
                     break;
                 }
             }
-            if(copy == null){
+            if(delNode == null){
                 return false;
             }
         }
-        if(copy.rightChild == null && copy.leftChild == null){
-            if(copy == root){
+        if(delNode.rightChild == null && delNode.leftChild == null){
+
+            if(delNode == root){
                 root = null;
             }else if(isLeft){
                 parent.leftChild = null;
@@ -96,61 +97,53 @@ public class B_Node<T> implements B_Tree<T>{
                 parent.rightChild = null;
             }
             return true;
-        }
-        if(copy.rightChild == null && copy.leftChild != null){
-            if(copy == root){
-                root = null;
+        }else if(delNode.rightChild == null && delNode.leftChild != null){
+            if(delNode == root){
+                root = delNode.leftChild;
             }else if(isLeft){
-                parent.leftChild = copy.leftChild;
+                parent.leftChild = delNode.leftChild;
             }else{
-                parent.rightChild = copy.leftChild;
+                parent.rightChild = delNode.leftChild;
             }
             return true;
-        }else if(copy.rightChild != null && copy.leftChild == null) {
-            if(copy == root){
-                root = null;
+        }else if(delNode.rightChild != null && delNode.leftChild == null) {
+            if(delNode == root){
+                root = delNode.rightChild;
             }else if(isLeft){
-                parent.leftChild = copy.rightChild;
+                parent.leftChild = delNode.rightChild;
             }else{
-                parent.rightChild  = copy.rightChild;
+                parent.rightChild  = delNode.rightChild;
             }
             return true;
-        }
-        Node<T> parentNode = null;
-        Node<T> nodeR = copy.rightChild;
-        if(nodeR.leftChild == null){
-            if(copy == root){
-                root = null;
-            }else if(isLeft){
-                nodeR.leftChild = copy.leftChild;
-                parent.leftChild = nodeR;
-
-            }else{
-                nodeR.leftChild = copy.leftChild;
-                parent.rightChild  = nodeR;
-            }
         }else{
-            while (nodeR.leftChild != null){
-                parentNode = nodeR;
-                nodeR = nodeR.leftChild;
-            }
-            parentNode.leftChild = nodeR.rightChild;
-            nodeR.leftChild = copy.leftChild;
-            nodeR.rightChild = copy.rightChild;
-            if(copy == root){
-                root = null;
+            Node<T> successor = getSuccessor(delNode);
+            if(delNode == root){
+                root = successor;
             }else if(isLeft){
-                parent.leftChild = nodeR;
-            }else{
-                parent.rightChild  = nodeR;
+                parent.leftChild = successor.rightChild;
+            }else {
+                parent.rightChild  = delNode.rightChild;
             }
-            return true;
+            successor.leftChild = delNode.leftChild;
         }
 
         return false;
     }
 
+    public Node<T> getSuccessor(Node<T> node){
+        Node<T> parentNode = null;
+        Node<T> successor = node.rightChild;//右
+        while(successor.leftChild != null){
+            parentNode = successor;
+            successor = successor.leftChild;
+        }
+        if(node.rightChild != successor){
+           parentNode.leftChild = successor.rightChild;
+           successor.rightChild = node.rightChild;
+        }
 
+        return successor;
+    }
     //中序遍历
     public void infixOrder(Node current){
         if(current != null){
@@ -217,7 +210,16 @@ public class B_Node<T> implements B_Tree<T>{
         b_node.insert(22);
         b_node.insert(2);
         b_node.insert(6);
-        System.out.println(node.rightChild.var);
+        b_node.infixOrder(b_node.root);
+        System.out.println();
+        b_node.postOrder(b_node.root);
+        System.out.println();
+        b_node.preOrder(b_node.root);
+        System.out.println();
+        System.out.println(b_node.findMin().var);
+        System.out.println(b_node.findMax().var);
+        b_node.delete(2);
+        b_node.delete(22);
         b_node.infixOrder(b_node.root);
         System.out.println();
         b_node.postOrder(b_node.root);
