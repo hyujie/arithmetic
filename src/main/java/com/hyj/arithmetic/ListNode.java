@@ -83,4 +83,12 @@ public class ListNode {
         return q;
     }
 
+    public void printString(){
+        ListNode p = this;
+        while(p.nextNode != null){
+            System.out.print(p.val+">>");
+            p = p.nextNode;
+        }
+        System.out.println(p.val);
+    }
 }
